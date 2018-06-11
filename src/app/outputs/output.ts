@@ -11,30 +11,3 @@ export class Output {
   merkle_proof: string;
 }
 
-export const MOCK_OUTPUTS: Output[] = [
-    {
-    root_key_id: '',
-    key_id: '',
-    n_child: 0,
-    value: 0,
-    status: '',
-    height: 0,
-   lock_height: 0,
-   is_coinbase: false,
-   block: '' ,
-    merkle_proof: '',
-  },
- {
-    root_key_id: '',
-    key_id: '',
-    n_child: 1,
-    value: 0,
-    status: '',
-    height: 0,
-   lock_height: 0,
-   is_coinbase: false,
-   block: '' ,
-    merkle_proof: '',
-  },
-];
-

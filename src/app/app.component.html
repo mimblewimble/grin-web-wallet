@@ -1,54 +1,17 @@
 <div class="d-flex bg-dark">
-  <div class="w-100">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-      <!--a class="navbar-brand" href="#">Logo</a-->
-      <!-- Links -->
-      <ul class="navbar-nav">
-        <li class="nav-item p-1">
-          <a class="nav-link" href="#">
-            <div style="text-align: center">
-              <fa-icon icon="wallet" size="2x"></fa-icon>
-            </div>
-            <div class="small m-1">MY WALLET</div>
-          </a>
-        </li>
-        <li class="nav-item p-1">
-          <a class="nav-link" href="#">
-            <div style="text-align: center">
-              <fa-icon icon="arrow-alt-circle-up" size="2x"></fa-icon>
-            </div>
-            <div class="small m-1">SEND</div>
-          </a>
-        </li>
-        <li class="nav-item p-1">
-          <a class="nav-link" href="#">
-            <div style="text-align: center">
-              <fa-icon icon="arrow-alt-circle-down" size="2x"></fa-icon>
-            </div>
-            <div class="small m-1">RECEIVE</div>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <nav class="navbar bg-dark navbar-dark ml-auto">
-    <ul class="navbar-nav  mr-3">
-      <li class="nav-item p-1">
-        <a class="nav-link" href="#">
-          <div style="text-align: center">
-            <fa-icon icon="question-circle" size="2x"></fa-icon>
-          </div>
-          <div class="small m-1">HELP</div>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <app-menu class="d-flex w-100"></app-menu>
   <div class="d-flex bg-secondary ml-auto">
     <app-summary></app-summary>
   </div>
 </div>
+<div style="background: #DCDCDC;">
 
-<div class="container-fluid">
-  <h1>{{title}}</h1>
-  <app-outputs></app-outputs>
+  <ol class="breadcrumb ml-3 bg-transparent">
+    <li class="breadcrumb-item"><a href="#">Wallets</a></li>
+    <li class="breadcrumb-item active">Personal</li>
+  </ol>
+
+</div>
+<div class="ml-3">
+  <router-outlet></router-outlet>
 </div>

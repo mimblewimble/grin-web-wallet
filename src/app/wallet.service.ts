@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Output } from './outputs/output';
-import { WalletInfo } from './summary/walletinfo';
+import { WalletInfo } from './wallet-info/walletinfo';
 
 @Injectable({
   providedIn: 'root'

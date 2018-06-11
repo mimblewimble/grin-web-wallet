@@ -1,11 +1,37 @@
-<h1>Outputs</h1>
 <!--div>
    <label>value:
      <input [(ngModel)="output.value" placeholder = "value"/>
    </label>
 </div-->
-<ul class = "outputs">
-  <li *ngFor="let output of outputs">
-    <span class="badge">{{output.key_id}}</span> {{output.n_child}}
-  </li>
-</ul>
+
+<div class="container-fluid">
+  <h3>Outputs for Wallet: Personal</h3>
+  <p>As of Block: {{walletInfo.current_height}}</p>
+  <table class="table table-sm table-hover table-striped table-responsive">
+    <thead>
+       <th>Amount</th>
+       <th>Status</th>
+       <th>Block Height</th>
+      <th>Root Key ID</th>
+      <th>Key Id</th>
+      <th>Child Key Index</th>
+      <th>Lock Height</th>
+      <th>Coinbase?</th>
+      <th>Block</th>
+
+    </thead>
+    <tbody>
+  <tr *ngFor="let output of outputs">
+    <td> {{amountAsHr(output.value, 9)}}</td>
+    <td class="">{{output.status}}</td>
+    <td class="">{{output.height}}</td>
+      <td class="">{{output.root_key_id}}</td>
+      <td class="">{{output.key_id}}</td>
+    <td class="">{{output.n_child}}</td>
+    <td class="">{{output.lock_height}}</td>
+    <td class="">{{output.is_coinbase}}</td>
+    <td class="">{{output.block}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { WalletService } from '../wallet.service';
-import { WalletInfo } from '../wallet-info/walletinfo';
+import { Component, Input, OnInit } from '@angular/core';
+import { WalletService} from '../wallet.service';
+import { WalletInfo } from './walletinfo';
 import { amountAsHr} from '../shared/format';
 
 @Component({
-  selector: 'app-summary',
-  templateUrl: './summary.component.html',
-  styleUrls: ['./summary.component.css']
+  selector: 'app-wallet-info',
+  templateUrl: './wallet-info.component.html',
+  styleUrls: ['./wallet-info.component.css']
 })
-export class SummaryComponent implements OnInit {
+export class WalletInfoComponent implements OnInit {
   walletInfo: WalletInfo;
   amountAsHr = amountAsHr;
 
@@ -18,11 +18,9 @@ export class SummaryComponent implements OnInit {
   getWalletInfo(): void {
     this.walletService.getSummaryInfo()
       .subscribe(walletInfo => this.walletInfo = walletInfo);
-
   }
-
   ngOnInit() {
     this.getWalletInfo();
   }
-}
 
+}

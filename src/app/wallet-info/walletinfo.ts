@@ -9,3 +9,4 @@ export class WalletInfo {
   data_confirmed_from: string;
 }
 
+
