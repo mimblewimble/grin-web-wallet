@@ -1,0 +1,11 @@
+<h1>Outputs</h1>
+<!--div>
+   <label>value:
+     <input [(ngModel)="output.value" placeholder = "value"/>
+   </label>
+</div-->
+<ul class = "outputs">
+  <li *ngFor="let output of outputs">
+    <span class="badge">{{output.key_id}}</span> {{output.n_child}}
+  </li>
+</ul>
