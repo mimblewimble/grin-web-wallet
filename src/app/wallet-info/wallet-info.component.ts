@@ -9,18 +9,12 @@ import { amountAsHr} from '../shared/format';
   styleUrls: ['./wallet-info.component.css']
 })
 export class WalletInfoComponent implements OnInit {
-  walletInfo: WalletInfo;
   amountAsHr = amountAsHr;
 
-  constructor(private walletService: WalletService) {
+  constructor(public walletService: WalletService) {
   }
 
-  getWalletInfo(): void {
-    this.walletService.getSummaryInfo()
-      .subscribe(walletInfo => this.walletInfo = walletInfo);
-  }
   ngOnInit() {
-    this.getWalletInfo();
   }
 
 }

@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
   <h3>Outputs for Wallet: Personal</h3>
-  <p>As of Block: {{walletInfo.current_height}}</p>
+  <p>As of Block: {{walletService.walletInfo.current_height}}</p>
   <table class="table table-sm table-hover table-striped table-responsive">
     <thead>
        <th>Amount</th>
@@ -21,7 +21,7 @@
 
     </thead>
     <tbody>
-  <tr *ngFor="let output of outputs">
+  <tr *ngFor="let output of walletService.outputs">
     <td> {{amountAsHr(output.value, 9)}}</td>
     <td class="">{{output.status}}</td>
     <td class="">{{output.height}}</td>

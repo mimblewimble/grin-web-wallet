@@ -10,20 +10,11 @@ import { amountAsHr} from '../shared/format';
   styleUrls: ['./outputs.component.css']
 })
 export class OutputsComponent implements OnInit {
-  outputs: Output[];
-  walletInfo: WalletInfo;
   amountAsHr = amountAsHr;
-  constructor(private walletService: WalletService) { }
-
-  getOutputs(): void {
-    this.walletService.getOutputs()
-      .subscribe(outputs => this.outputs = outputs);
-    this.walletService.getSummaryInfo()
-      .subscribe(walletInfo => this.walletInfo = walletInfo);
-  }
+  constructor(public walletService: WalletService) { }
 
   ngOnInit() {
-    this.getOutputs();
+    this.walletService.refreshOutputs(false );
   }
 
 }

@@ -10,6 +10,7 @@ import {OutputsComponent} from './outputs/outputs.component';
 import {SummaryComponent} from './summary/summary.component';
 import {MenuComponent} from './menu/menu.component';
 import {WalletInfoComponent} from './wallet-info/wallet-info.component';
+import {WalletService} from './wallet.service';
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
@@ -56,7 +57,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     NgbModule.forRoot(),
   ],
-  providers: [],
+  providers: [WalletService],
   bootstrap: [AppComponent]
 })
 

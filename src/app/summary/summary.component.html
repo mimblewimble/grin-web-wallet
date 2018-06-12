@@ -3,10 +3,10 @@
   <div class="d-flex">
     <div class="d-flex">
       <div class="small align-text-top p-1">GRIN</div>
-      <div class="pl-0 ml-0 h2 align-self-baseline">{{amountAsHr(walletInfo.total, 2)}}</div>
+      <div class="pl-0 ml-0 h2 align-self-baseline">{{amountAsHr(walletService.walletInfo.total, 2)}}</div>
     </div>
     <div class="p-2 align-self-top">
-      <fa-icon icon="sync-alt"></fa-icon>
+      <fa-icon icon="sync-alt" (click)="refreshWalletInfo()"></fa-icon>
     </div>
   </div>
 </div>
