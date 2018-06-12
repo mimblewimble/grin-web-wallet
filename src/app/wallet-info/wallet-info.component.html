@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="w-50">
   <h3>Personal</h3>
-  <p>As of Block: {{walletService.walletInfo.current_height}} ({{walletService.currentNodeHeight-walletService.walletInfo.current_height}} Blocks Ago)</p>
+  <p>As of Block: {{walletService.walletInfo?.current_height}} ({{walletService.currentNodeHeight-walletService.walletInfo?.current_height}} Blocks Ago)</p>
   <!--p>Validated against live node: {{walletService.walletInfo.data_confirmed}}</p-->
   <!--p>Validated against live node: {{walletService.walletInfo.data_confirmed_from}}</p-->
     <p>
@@ -13,22 +13,22 @@
     <tbody>
     <tr class="table-primary">
       <td>Total</td>
-      <td class="text-right">{{amountAsHr(walletService.walletInfo.total, 9)}}</td>
+      <td class="text-right">{{amountAsHr(walletService.walletInfo?.total, 9)}}</td>
     </tr>    <tr>
       <td>Awaiting Confirmation</td>
-      <td class="text-right">{{amountAsHr(walletService.walletInfo.amount_awaiting_confirmation, 9)}}</td>
+      <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_awaiting_confirmation, 9)}}</td>
     </tr>
     <tr>
       <td>Immature Coinbase
-      <td class="text-right">{{amountAsHr(walletService.walletInfo.amount_confirmed_but_locked,9)}}</td>
+      <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_confirmed_but_locked,9)}}</td>
     </tr>
     <tr>
       <td>Locked by an Unconfirmed Transaction</td>
-      <td class="text-right">{{amountAsHr(walletService.walletInfo.amount_locked,9)}}</td>
+      <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_locked,9)}}</td>
     </tr>
     <tr class="table-success">
       <td>Currently Spendable</td>
-      <td class="text-right">{{amountAsHr(walletService.walletInfo.amount_currently_spendable, 9)}}</td>
+      <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_currently_spendable, 9)}}</td>
     </tr>
     </tbody>
   </table>

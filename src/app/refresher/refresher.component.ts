@@ -12,19 +12,35 @@ export class RefresherComponent {
   }
 
   ngOnInit() {
-    let modalRef;
+    let refresherModalRef = null;
+    let failureModalRef;
     this.walletService.isUpdatingEmitter.subscribe(
       (value) => {
-        console.log('VALUE: ' + value);
         if (value) {
-            modalRef = this.modalService.open(RefresherContentComponent, {
-              backdrop: 'static',
-              keyboard: false,
-            });
+          refresherModalRef = this.modalService.open(RefresherContentComponent, {
+            backdrop: 'static',
+            keyboard: false,
+          });
         } else {
-           if (modalRef) {
-             modalRef.close();
-           }
+          if (refresherModalRef) {
+            refresherModalRef.close();
+          }
+        }
+      }
+    );
+    this.walletService.totalFailureEmitter.subscribe(
+      (value) => {
+        if (value && ! failureModalRef) {
+          failureModalRef = this.modalService.open(FailureContentComponent, {
+            backdrop: 'static',
+            keyboard: false,
+          });
+        } else {
+          if (!value && failureModalRef) {
+            this.walletService.refreshWalletInfo(false);
+            failureModalRef.close();
+            failureModalRef = null;
+          }
         }
       }
     );
@@ -42,3 +58,13 @@ export class RefresherContentComponent {
   }
 }
 
+@Component({
+  selector: 'app-failure-content',
+  templateUrl: 'failure.component.html',
+})
+export class FailureContentComponent {
+  @Input() name;
+
+  constructor(public activeModal: NgbActiveModal) {
+  }
+}

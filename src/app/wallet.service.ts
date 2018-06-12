@@ -1,6 +1,5 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {EventEmitter, Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
 import {Output, OutputsResponse} from './outputs/output';
 import {WalletInfo} from './wallet-info/walletinfo';
 
@@ -14,6 +13,7 @@ export class WalletService {
   private node_height_url = 'http://localhost:13420/v1/wallet/owner/node_height';
 
   isUpdatingEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+  totalFailureEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   outputs: Output[];
   walletInfo: WalletInfo;
@@ -25,6 +25,8 @@ export class WalletService {
     private http: HttpClient,
     // private messageService: MessageService
   ) {
+    this.mostRecentValidatedHeight = 0;
+    this.currentNodeHeight = 0;
   }
 
   /** GET outputs from the server */
@@ -47,11 +49,15 @@ export class WalletService {
  refreshHeight(): void {
     this.http.get(this.node_height_url)
       .subscribe(heightInfo => {
+        this.totalFailureEmitter.emit(false);
         if (heightInfo[1]) {
           this.currentNodeHeight = heightInfo[0];
           this.nodeHeightValidated = true;
         }
-      });
+      },
+        error => {
+           this.totalFailureEmitter.emit(true);
+        });
   }
 
   /** GET wallet summary from the server */
