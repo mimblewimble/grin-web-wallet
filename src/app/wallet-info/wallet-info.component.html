@@ -1,7 +1,12 @@
 <div class="container-fluid">
   <div class="w-50">
   <h3>Personal</h3>
-  <p>As of Block: {{walletService.walletInfo.current_height}}</p>
+  <p>As of Block: {{walletService.walletInfo.current_height}} ({{walletService.currentNodeHeight-walletService.walletInfo.current_height}} Blocks Ago)</p>
+  <!--p>Validated against live node: {{walletService.walletInfo.data_confirmed}}</p-->
+  <!--p>Validated against live node: {{walletService.walletInfo.data_confirmed_from}}</p-->
+    <p>
+  <button type="button" class="btn btn-primary" (click)="refreshWalletInfo()">Update</button>
+    </p>
   <table class="table table-sm table-hover">
     <thead>
     </thead>
@@ -28,7 +33,7 @@
     </tbody>
   </table>
     <a routerLink="/wallet-outputs">
-      <button type="button" class="btn btn-primary float-right" onclick="wallet-outputs">Show Outputs</button>
+      <button type="button" class="btn btn-primary float-right">Show Outputs</button>
     </a>
   </div>
 </div>

@@ -21,6 +21,7 @@ import {
   faSyncAlt,
   faWallet,
 } from '@fortawesome/free-solid-svg-icons';
+import {RefresherComponent, RefresherContentComponent} from './refresher/refresher.component';
 
 library.add(faArrowAltCircleDown);
 library.add(faArrowAltCircleUp);
@@ -44,12 +45,15 @@ const appRoutes: Routes = [
     OutputsComponent,
     SummaryComponent,
     MenuComponent,
-    WalletInfoComponent
+    WalletInfoComponent,
+    RefresherComponent,
+    RefresherContentComponent,
   ],
+  entryComponents: [RefresherContentComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      {enableTracing: true}
+      {enableTracing: false}
     ),
     BrowserModule,
     FontAwesomeModule,

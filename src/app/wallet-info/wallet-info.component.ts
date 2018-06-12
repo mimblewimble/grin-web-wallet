@@ -14,6 +14,10 @@ export class WalletInfoComponent implements OnInit {
   constructor(public walletService: WalletService) {
   }
 
+  refreshWalletInfo(): void {
+    this.walletService.refreshWalletInfo(true);
+  }
+
   ngOnInit() {
   }
 

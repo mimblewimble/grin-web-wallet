@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService} from '../wallet.service';
-import { Output } from './output';
-import {WalletInfo} from '../wallet-info/walletinfo';
 import { amountAsHr} from '../shared/format';
 
 @Component({

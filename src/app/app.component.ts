@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
 import { WalletService} from './wallet.service';
 
 @Component({
@@ -13,7 +14,11 @@ export class AppComponent implements  OnInit {
   }
 
   ngOnInit() {
-    console.log("Refreshing wallet info");
+    this.walletService.refreshHeight();
     this.walletService.refreshWalletInfo(false);
+    const counter = interval(5000)
+    counter.subscribe(n =>
+         this.walletService.refreshHeight()
+    );
   }
 }

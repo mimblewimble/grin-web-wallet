@@ -1,3 +1,9 @@
+
+export class OutputsResponse {
+  validated_against_node: boolean;
+  outputs: Output[];
+}
+
 export class Output {
   root_key_id: string;
   key_id: string;

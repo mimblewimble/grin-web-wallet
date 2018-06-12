@@ -28,16 +28,35 @@
     </li>
   </ul>
 </nav>
-<nav class="navbar bg-dark navbar-dark ml-auto">
-  <ul class="navbar-nav  mr-3">
-    <li class="nav-item p-1">
+<!--nav class="navbar navbar-expand-sm bg-dark navbar-dark ml-auto"-->
+  <!--ul class="navbar-nav  mr-2" style="position: relative; left: 13px">
+    <li class="nav-item nav-link p-1 small p-2">
+      <div style="text-align: right;" class="font-weight-bold m-1">
+        GRIN
+      </div>
+      <div class="m-1 text-right" style="position: relative; top: 3px;">
+        <span class="font-weight-bold" style="text-align: right;">{{walletService.currentNodeHeight}}</span>
+      </div>
+      <div  class="m-1 text-right" style="position: relative; top: 5px;">
+        Chain Height
+      </div>
+    </li-->
+ <div class="d-flex flex-column text-white p-3 justify-content-center m-0 ml-auto">
+  <div class="small font-weight-bold text-right">GRIN</div>
+  <div class="d-flex">
+    <div class="pl-0 ml-0 h3 ">{{walletService.currentNodeHeight}}</div>
+  </div>
+  <div class="small text-right" style="position: relative; bottom: 8px;">
+      Chain Height
+  </div>
+</div>   <!--li class="nav-item p-1">
       <a class="nav-link" href="#">
         <div style="text-align: center">
           <fa-icon icon="question-circle" size="2x"></fa-icon>
         </div>
         <div class="small m-1">HELP</div>
       </a>
-    </li>
-  </ul>
+    </li-->
+  <!--/ul-->
 
-</nav>
+<!--/nav>-->
