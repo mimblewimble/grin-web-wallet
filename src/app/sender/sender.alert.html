@@ -1,0 +1,2 @@
+<ngb-alert *ngIf="show_error" (close)="show_error=false">Send failed: {{errorMessage}}</ngb-alert>
+<ngb-alert *ngIf="show_success" (close)="show_success=false" class="alert-success">Transaction completed and posted to chain.</ngb-alert>

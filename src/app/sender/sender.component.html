@@ -1,0 +1,47 @@
+  <div class="modal-header">
+    <h4 class="modal-title">Send Grins</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <app-send-alert></app-send-alert>
+  <div class="modal-body">
+    <form>
+      <div class="form-group row">
+        <label for="inputAddress" class="col-sm-3 col-form-label">Dest. Address</label>
+        <div class="col-sm-4">
+          <input name="destInput"[(ngModel)]="txSendArgs.dest" class="form-control" id="inputAddress">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputAmount" class="col-sm-3 col-form-label">Amount</label>
+        <div class="col-sm-3">
+          <input name="amount" [(ngModel)]="txSendArgs.amount" type="number" class="form-control" id="inputAmount" placeholder="Amount">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-3">Consolidate Outputs</div>
+        <div class="col-sm-7">
+          <div class="form-check">
+            <input name="useAll" class="form-check-input" [(ngModel)]="txSendArgs.selection_strategy_is_use_all"  type="checkbox" id="gridCheck1">
+            <label class="form-check-label small" for="gridCheck1">
+              (Use as many outputs as possible to reduce wallet size)
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-3">Use Dandelion Relay</div>
+        <div class="col-sm-7">
+          <div class="form-check">
+            <input name="fluff" class="form-check-input"  [(ngModel)]="txSendArgs.fluff" type="checkbox" id="gridCheck1">
+            <label class="form-check-label small" for="gridCheck1">
+              (Hide transaction origin for increased privacy)
+            </label>
+          </div>
+        </div>
+      </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="postSend()">Send</button>
+  </div>
+

@@ -1,13 +1,14 @@
 <div class="d-flex flex-column text-white p-3 justify-content-center m-0" style="position: relative; right: 4px">
-  <div class="small"><span class="font-weight-bold">Total:</span> ({{walletService.currentNodeHeight-walletService.mostRecentValidatedHeight}} Blocks Ago)</div>
+  <div class="small"><span class="font-weight-bold">Spendable:</span> ({{walletService.currentNodeHeight-walletService.mostRecentValidatedHeight}} Blocks Ago)</div>
   <div class="d-flex">
-    <div class="pl-0 ml-0 h3  text-success">{{amountAsHr(walletService.walletInfo?.total, 4)}}</div>
+    <div class="pl-0 ml-0 h3  text-success">{{amountAsHr(walletService.walletInfo?.amount_currently_spendable, 4)}}</div>
     <div style="position: relative; top: 7px; left:  10px">
       <fa-icon icon="sync-alt" (click)="refreshWalletInfo()"></fa-icon>
     </div>
   </div>
   <div class="small" style="position: relative; bottom: 8px;">
-    ({{amountAsHr(walletService.walletInfo?.amount_currently_spendable, 4)}} Spendable)
+    ({{amountAsHr(walletService.walletInfo?.amount_awaiting_confirmation+
+    walletService.walletInfo?.amount_confirmed_but_locked, 4)}} Unconfirmed or Locked)
   </div>
 </div>
 

@@ -11,6 +11,8 @@ import {SummaryComponent} from './summary/summary.component';
 import {MenuComponent} from './menu/menu.component';
 import {WalletInfoComponent} from './wallet-info/wallet-info.component';
 import {WalletService} from './wallet.service';
+import {FailureContentComponent, RefresherComponent, RefresherContentComponent} from './refresher/refresher.component';
+import {SenderAlertComponent, SenderComponent, SenderContentComponent} from './sender/sender.component';
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
@@ -21,7 +23,6 @@ import {
   faSyncAlt,
   faWallet,
 } from '@fortawesome/free-solid-svg-icons';
-import {FailureContentComponent, RefresherComponent, RefresherContentComponent} from './refresher/refresher.component';
 
 library.add(faArrowAltCircleDown);
 library.add(faArrowAltCircleUp);
@@ -49,9 +50,13 @@ const appRoutes: Routes = [
     RefresherComponent,
     RefresherContentComponent,
     FailureContentComponent,
+    SenderAlertComponent,
+    SenderComponent,
+    SenderContentComponent,
   ],
   entryComponents: [RefresherContentComponent,
-  FailureContentComponent],
+  FailureContentComponent,
+  SenderContentComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes,
