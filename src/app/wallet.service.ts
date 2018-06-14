@@ -32,15 +32,12 @@ export class WalletService {
 
   outputs: Output[];
   walletInfo: WalletInfo;
-  mostRecentValidatedHeight: number;
   currentNodeHeight: number;
-  nodeHeightValidated: boolean;
 
   constructor(
     private http: HttpClient,
     // private messageService: MessageService
   ) {
-    this.mostRecentValidatedHeight = 0;
     this.currentNodeHeight = 0;
   }
 
@@ -71,7 +68,6 @@ export class WalletService {
         this.totalFailureEmitter.emit(false);
         if (heightInfo[1]) {
           this.currentNodeHeight = heightInfo[0];
-          this.nodeHeightValidated = true;
         }
       },
         error => {
@@ -90,18 +86,17 @@ export class WalletService {
     }
     this.http.get<WalletInfo>(wallet_info_url)
       .subscribe(walletInfo => {
-        this.walletInfo = walletInfo;
-        this.mostRecentValidatedHeight = this.walletInfo.current_height;
-        if (this.walletInfo.data_confirmed) {
-          this.currentNodeHeight = this.walletInfo.current_height;
-          this.nodeHeightValidated = true;
+        this.walletInfo = walletInfo[1];
+        console.dir(this.walletInfo);
+        if (this.walletInfo.last_confirmed_height > this.currentNodeHeight) {
+          this.currentNodeHeight = this.walletInfo.last_confirmed_height;
         }
         this.isUpdatingEmitter.emit(false);
       });
   }
 
   postSend(args: SendTXArgs): void {
-    console.log('Posting - '+this.send_url);
+    console.log('Posting - ' + this.send_url);
     console.dir(args);
     this.http.post(this.send_url, args)
       .subscribe((res) => {

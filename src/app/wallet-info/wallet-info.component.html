@@ -1,11 +1,8 @@
 <div class="container-fluid">
   <div class="w-50">
-  <h3>Personal</h3>
-  <p>As of Block: {{walletService.walletInfo?.current_height}} ({{walletService.currentNodeHeight-walletService.walletInfo?.current_height}} Blocks Ago)</p>
-  <!--p>Validated against live node: {{walletService.walletInfo.data_confirmed}}</p-->
-  <!--p>Validated against live node: {{walletService.walletInfo.data_confirmed_from}}</p-->
+  <h3>Wallet Summary</h3>
+  <p>Validated as of Block: {{walletService.walletInfo?.last_confirmed_height}} ({{walletService.currentNodeHeight-walletService.walletInfo?.last_confirmed_height}} Blocks Ago)</p>
     <p>
-  <button type="button" class="btn btn-primary" (click)="refreshWalletInfo()">Update</button>
     </p>
   <table class="table table-sm table-hover">
     <thead>
@@ -20,20 +17,19 @@
     </tr>
     <tr>
       <td>Immature Coinbase
-      <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_confirmed_but_locked,9)}}</td>
+      <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_immature,9)}}</td>
     </tr>
-    <tr>
-      <td>Locked by an Unconfirmed Transaction</td>
-      <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_locked,9)}}</td>
-    </tr>
+
     <tr class="table-success">
       <td>Currently Spendable</td>
       <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_currently_spendable, 9)}}</td>
     </tr>
     </tbody>
   </table>
+     <div class="small">({{amountAsHr(walletService.walletInfo?.amount_locked,9)}} is locked pending transaction confirmations)</div>
+    <button type="button" class="btn btn-primary float-right" (click)="refreshWalletInfo()">Update and Validate</button>
     <a routerLink="/wallet-outputs">
-      <button type="button" class="btn btn-primary float-right">Show Outputs</button>
+      Show Outputs
     </a>
   </div>
 </div>

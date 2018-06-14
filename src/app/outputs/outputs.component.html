@@ -5,8 +5,11 @@
 </div-->
 
 <div class="container-fluid">
-  <h3>Outputs for Wallet: Personal</h3>
-  <p>As of Block: {{walletService.walletInfo?.current_height}}</p>
+  <h3>Wallet Outputs</h3>
+  <p>Validated as of Block: {{walletService.walletInfo?.last_confirmed_height}} ({{walletService.currentNodeHeight-walletService.walletInfo?.last_confirmed_height}} Blocks Ago)</p>
+  <a routerLink="/wallet-info">
+    Show Summary
+  </a>
   <table class="table table-sm table-hover table-striped table-responsive">
     <thead>
        <th>Amount</th>

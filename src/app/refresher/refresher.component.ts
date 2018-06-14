@@ -20,6 +20,7 @@ export class RefresherComponent {
           refresherModalRef = this.modalService.open(RefresherContentComponent, {
             backdrop: 'static',
             keyboard: false,
+            centered: true,
           });
         } else {
           if (refresherModalRef) {
@@ -34,6 +35,8 @@ export class RefresherComponent {
           failureModalRef = this.modalService.open(FailureContentComponent, {
             backdrop: 'static',
             keyboard: false,
+            centered: true,
+            size: 'lg'
           });
         } else {
           if (!value && failureModalRef) {
