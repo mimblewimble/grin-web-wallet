@@ -1,0 +1,12 @@
+ <table class="table table-sm  w-100 table-striped table-hover">
+   <tbody>
+   <ng-container *ngFor="let tx of walletService.txs.reverse();let i = index" >
+     <tr *ngIf="i<num_entries || num_entries==0" [routerLink]="['/tx-detail', tx.id]" style="cursor: pointer;" >
+       <td class="">{{parseDate(tx.creation_ts)}}</td>
+       <td class="">{{parseTxType(tx)}}</td>
+       <td class="text-right" [ngClass]="netChange(tx)<0?'text-danger':'text-success'"> {{amountAsHr(netChange(tx), 9)}}</td>
+       <td class="text-right" [ngClass]="!tx.confirmed?'text-danger':'text-success'"> {{parseConfirmed(tx)}}</td>
+     </tr>
+   </ng-container>
+   </tbody>
+ </table>

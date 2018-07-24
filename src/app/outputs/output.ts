@@ -14,6 +14,6 @@ export class Output {
   lock_height: number;
   is_coinbase: boolean;
   block: string;
-  merkle_proof: string;
+  tx_log_entry: number;
 }
 

@@ -1,36 +1,51 @@
 <div class="container-fluid">
   <div class="w-50">
-  <h3>Wallet Summary</h3>
-  <p>Validated as of Block: {{walletService.walletInfo?.last_confirmed_height}} ({{walletService.currentNodeHeight-walletService.walletInfo?.last_confirmed_height}} Blocks Ago)</p>
+    <div class="d-flex flex-row justify-content-between">
+      <h3>Wallet Summary</h3>
+      <a routerLink="/wallet-outputs">
+        Show Outputs
+      </a>
+    </div>
+    <p>Validated as of Block: {{walletService.walletInfo?.last_confirmed_height}}
+      ({{walletService.currentNodeHeight-walletService.walletInfo?.last_confirmed_height}} Blocks Ago)</p>
     <p>
     </p>
-  <table class="table table-sm table-hover">
-    <thead>
-    </thead>
-    <tbody>
-    <tr class="table-primary">
-      <td>Total</td>
-      <td class="text-right">{{amountAsHr(walletService.walletInfo?.total, 9)}}</td>
-    </tr>    <tr>
-      <td>Awaiting Confirmation</td>
-      <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_awaiting_confirmation, 9)}}</td>
-    </tr>
-    <tr>
-      <td>Immature Coinbase
-      <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_immature,9)}}</td>
-    </tr>
+    <table class="table table-sm">
+      <thead>
+      </thead>
+      <tbody>
+      <tr class="table-primary">
+        <td>Total</td>
+        <td class="text-right">{{amountAsHr(walletService.walletInfo?.total, 9)}}</td>
+      </tr>
+      <tr>
+        <td>Awaiting Confirmation</td>
+        <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_awaiting_confirmation, 9)}}</td>
+      </tr>
+      <tr>
+        <td>Immature Coinbase
+        <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_immature,9)}}</td>
+      </tr>
 
-    <tr class="table-success">
-      <td>Currently Spendable</td>
-      <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_currently_spendable, 9)}}</td>
-    </tr>
-    </tbody>
-  </table>
-     <div class="small">({{amountAsHr(walletService.walletInfo?.amount_locked,9)}} is locked pending transaction confirmations)</div>
+      <tr class="table-success">
+        <td>Currently Spendable</td>
+        <td class="text-right">{{amountAsHr(walletService.walletInfo?.amount_currently_spendable, 9)}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="small">({{amountAsHr(walletService.walletInfo?.amount_locked,9)}} is locked pending transaction
+      confirmations)
+    </div>
+    <p></p>
+    <div class="d-flex flex-row justify-content-between">
+      <h3>Most Recent Transactions</h3>
+      <a routerLink="/txs-all">
+        Show All Transactions
+      </a>
+    </div>
+    <app-tx-listing [num_entries]="10"></app-tx-listing>
     <button type="button" class="btn btn-primary float-right" (click)="refreshWalletInfo()">Update and Validate</button>
-    <a routerLink="/wallet-outputs">
-      Show Outputs
-    </a>
+
   </div>
 </div>
 

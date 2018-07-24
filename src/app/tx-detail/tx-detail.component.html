@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="w-50">
+      <h3>Transaction Information</h3>
+    <p>
+    </p>
+    <table class="table table-sm">
+      <thead>
+      </thead>
+      <tbody>
+      <tr class="table-primary">
+        <td>Wallet Transaction ID</td>
+        <td class="text-right">{{walletService.cur_tx.id}}</td>
+      </tr>
+      <tr>
+        <td>Transaction Interaction ID</td>
+        <td class="text-right">{{walletService.cur_tx.tx_slate_id}}</td>
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td class="text-right">{{parseTxType(walletService.cur_tx)}}</td>
+      </tr>
+      <tr>
+        <td>Creation Time</td>
+        <td class="text-right">{{parseDate(walletService.cur_tx.creation_ts)}}</td>
+      </tr>
+      <tr>
+        <td>Confirmation Time</td>
+        <td class="text-right">{{parseDate(walletService.cur_tx.confirmation_ts)}}</td>
+      </tr>
+      <tr>
+        <td># Inputs</td>
+        <td class="text-right">{{walletService.cur_tx.num_inputs}}</td>
+      </tr>
+      <tr>
+        <td># Outputs</td>
+        <td class="text-right">{{walletService.cur_tx.num_outputs}}</td>
+      </tr>
+      <tr>
+        <td>Amount Credited</td>
+        <td class="text-right">{{amountAsHr(walletService.cur_tx.amount_credited, 9)}}</td>
+      </tr>
+      <tr>
+        <td>Amount Debited</td>
+        <td class="text-right">{{amountAsHr(walletService.cur_tx.amount_debited, 9)}}</td>
+      </tr>
+      <tr>
+        <td>Fee</td>
+        <td class="text-right">{{amountAsHr(walletService.cur_tx.fee, 9)}}</td>
+      </tr>
+      <tr [ngClass]="netChange(walletService.cur_tx)<0?'table-danger':'table-success'">
+        <td>Net Change</td>
+        <td class="text-right" [ngClass]="netChange(walletService.cur_tx)<0?'text-danger':'text-success'"> {{amountAsHr(netChange(walletService.cur_tx), 9)}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -23,6 +23,9 @@ import {
   faSyncAlt,
   faWallet,
 } from '@fortawesome/free-solid-svg-icons';
+import { TxListingComponent } from './tx-listing/tx-listing.component';
+import { TxListAllComponent } from './tx-list-all/tx-list-all.component';
+import { TxDetailComponent } from './tx-detail/tx-detail.component';
 
 library.add(faArrowAltCircleDown);
 library.add(faArrowAltCircleUp);
@@ -33,6 +36,8 @@ library.add(faQuestionCircle);
 const appRoutes: Routes = [
   {path: 'wallet-info', component: WalletInfoComponent},
   {path: 'wallet-outputs', component: OutputsComponent},
+  {path: 'tx-detail/:id', component: TxDetailComponent},
+  {path: 'txs-all', component: TxListAllComponent},
   {
     path: '',
     redirectTo: '/wallet-info',
@@ -53,6 +58,9 @@ const appRoutes: Routes = [
     SenderAlertComponent,
     SenderComponent,
     SenderContentComponent,
+    TxListingComponent,
+    TxListAllComponent,
+    TxDetailComponent,
   ],
   entryComponents: [RefresherContentComponent,
   FailureContentComponent,

@@ -1,17 +1,17 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {EventEmitter, Injectable} from '@angular/core';
 import {Output, OutputsResponse} from './outputs/output';
+import {TxLogEntry} from './tx-listing/tx-log-entry';
 import {WalletInfo} from './wallet-info/walletinfo';
 import {Error} from './shared/error';
 import {SendTXArgs} from './sender/sender';
 import {Observable, of} from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class WalletService {
 
   private output_url = 'http://localhost:13420/v1/wallet/owner/retrieve_outputs';
+  private txs_url = 'http://localhost:13420/v1/wallet/owner/retrieve_txs';
   private wallet_info_url = 'http://localhost:13420/v1/wallet/owner/retrieve_summary_info';
   private node_height_url = 'http://localhost:13420/v1/wallet/owner/node_height';
   private send_url = 'http://localhost:13420/v1/wallet/owner/issue_send_tx';
@@ -31,6 +31,8 @@ export class WalletService {
 
 
   outputs: Output[];
+  txs: TxLogEntry[];
+  cur_tx: TxLogEntry;
   walletInfo: WalletInfo;
   currentNodeHeight: number;
 
@@ -62,6 +64,26 @@ export class WalletService {
     });
   }
 
+  /** GET tx log entries from the server */
+  refreshTxLog(refresh_from_node: boolean, cur_tx_id: number): void {
+    if (refresh_from_node) {
+      this.isUpdatingEmitter.emit(true);
+    }
+    let tx_url = this.txs_url;
+    if (refresh_from_node) {
+      tx_url += '?refresh' ;
+    }
+    this.http.get<TxLogEntry>(tx_url)
+    .subscribe( tx_response => {
+      this.txs = tx_response[1];
+      console.dir(this.txs);
+      this.isUpdatingEmitter.emit(false);
+      if (cur_tx_id !== 0) {
+        this.cur_tx = this.txs.find(tx => tx.id === cur_tx_id);
+      }
+    });
+  }
+
  refreshHeight(): void {
     this.http.get(this.node_height_url)
       .subscribe(heightInfo => {
@@ -73,6 +95,10 @@ export class WalletService {
         error => {
            this.totalFailureEmitter.emit(true);
         });
+  }
+
+  getTx(id: number): Observable<TxLogEntry> {
+    return of(this.txs.find(tx => tx.id === id));
   }
 
   /** GET wallet summary from the server */
@@ -87,7 +113,6 @@ export class WalletService {
     this.http.get<WalletInfo>(wallet_info_url)
       .subscribe(walletInfo => {
         this.walletInfo = walletInfo[1];
-        console.dir(this.walletInfo);
         if (this.walletInfo.last_confirmed_height > this.currentNodeHeight) {
           this.currentNodeHeight = this.walletInfo.last_confirmed_height;
         }
@@ -138,3 +163,5 @@ export class WalletService {
     console.log('WalletService: ' + message);
   }
 }
+
+
