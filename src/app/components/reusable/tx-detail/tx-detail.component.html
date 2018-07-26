@@ -1,0 +1,49 @@
+<table class="table table-sm">
+  <tbody>
+  <tr class="table-primary">
+    <td>Wallet Transaction ID</td>
+    <td class="text-right">{{tx?.id}}</td>
+  </tr>
+  <tr>
+    <td>Transaction Interaction ID</td>
+    <td class="text-right">{{tx?.tx_slate_id}}</td>
+  </tr>
+  <tr>
+    <td>Type</td>
+    <td class="text-right">{{util.parseTxType(tx)}}</td>
+  </tr>
+  <tr>
+    <td>Creation Time</td>
+    <td class="text-right">{{util.parseDate(tx?.creation_ts)}}</td>
+  </tr>
+  <tr>
+    <td>Confirmation Time</td>
+    <td class="text-right">{{util.parseDate(tx?.confirmation_ts)}}</td>
+  </tr>
+  <tr>
+    <td># Inputs</td>
+    <td class="text-right">{{tx?.num_inputs}}</td>
+  </tr>
+  <tr>
+    <td># Outputs</td>
+    <td class="text-right">{{tx?.num_outputs}}</td>
+  </tr>
+  <tr>
+    <td>Amount Credited</td>
+    <td class="text-right">{{util.amountAsHr(tx?.amount_credited, 9)}}</td>
+  </tr>
+  <tr>
+    <td>Amount Debited</td>
+    <td class="text-right">{{util.amountAsHr(tx?.amount_debited, 9)}}</td>
+  </tr>
+  <tr>
+    <td>Fee</td>
+    <td class="text-right">{{util.amountAsHr(tx?.fee, 9)}}</td>
+  </tr>
+  <tr [ngClass]="util.netChange(tx)<0?'table-danger':'table-success'">
+    <td>Net Change</td>
+    <td class="text-right" [ngClass]="tx && util.netChange(tx)<0?'text-danger':'text-success'">
+      {{util.amountAsHr(util.netChange(tx), 9)}}
+    </td>
+  </tr>
+</table>

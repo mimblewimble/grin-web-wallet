@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TxDetailComponent } from './tx-detail.component';
+import { TxDetailDisplayComponent } from './tx-detail-display.component';
 
-describe('TxDetailComponent', () => {
-  let component: TxDetailComponent;
-  let fixture: ComponentFixture<TxDetailComponent>;
+describe('TxDetailDisplayComponent', () => {
+  let component: TxDetailDisplayComponent;
+  let fixture: ComponentFixture<TxDetailDisplayComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TxDetailComponent ]
+      declarations: [ TxDetailDisplayComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TxDetailComponent);
+    fixture = TestBed.createComponent(TxDetailDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TxListAllComponent } from './tx-list-all.component';
+import { TxDetailComponent } from './tx-detail.component';
 
-describe('TxListAllComponent', () => {
-  let component: TxListAllComponent;
-  let fixture: ComponentFixture<TxListAllComponent>;
+describe('TxDetailDisplayComponent', () => {
+  let component: TxDetailComponent;
+  let fixture: ComponentFixture<TxDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TxListAllComponent ]
+      declarations: [ TxDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TxListAllComponent);
+    fixture = TestBed.createComponent(TxDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

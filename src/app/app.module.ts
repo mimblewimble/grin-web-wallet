@@ -25,8 +25,9 @@ import {
   faWallet,
 } from '@fortawesome/free-solid-svg-icons';
 import { TxListingComponent } from './components/reusable/tx-listing/tx-listing.component';
-import { TxListAllComponent } from './components/single/tx-list-all/tx-list-all.component';
-import { TxDetailComponent } from './components/single/tx-detail/tx-detail.component';
+import { TxListDisplayComponent } from './components/single/tx-list-display/tx-list-display.component';
+import { TxDetailDisplayComponent } from './components/single/tx-detail-display/tx-detail-display.component';
+import { TxDetailComponent} from './components/reusable/tx-detail/tx-detail.component';
 import { WalletInfoDetailComponent } from './components/reusable/wallet-info-detail/wallet-info-detail.component';
 
 library.add(faArrowAltCircleDown);
@@ -49,8 +50,9 @@ library.add(faQuestionCircle);
     SenderComponent,
     SenderContentComponent,
     TxListingComponent,
-    TxListAllComponent,
+    TxListDisplayComponent,
     TxDetailComponent,
+    TxDetailDisplayComponent,
     WalletInfoDetailComponent,
   ],
   entryComponents: [RefresherContentComponent,
