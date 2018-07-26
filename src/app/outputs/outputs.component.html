@@ -26,7 +26,7 @@
     </thead>
     <tbody>
   <tr *ngFor="let output of walletService.outputs">
-    <td> {{amountAsHr(output.value, 9)}}</td>
+    <td> {{util.amountAsHr(output.value, 9)}}</td>
     <td class="">{{output.status}}</td>
     <td class="">{{output.height}}</td>
       <td class="">{{output.root_key_id}}</td>

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {amountAsHr, netChange, parseDate, parseConfirmed, parseTxType} from '../shared/format';
 import {WalletService} from '../wallet.service';
+import {TxLogEntry} from '../model/tx-log-entry';
+import {UtilService} from '../util.service';
 
 @Component({
   selector: 'app-tx-listing',
@@ -8,26 +9,24 @@ import {WalletService} from '../wallet.service';
   styleUrls: ['./tx-listing.component.css']
 })
 export class TxListingComponent implements OnInit {
-  amountAsHr = amountAsHr;
-  netChange = netChange;
-  parseDate = parseDate;
-  parseConfirmed = parseConfirmed;
-  parseTxType = parseTxType;
+  txs: TxLogEntry[];
   @Input() num_entries: number;
 
-  constructor(public walletService: WalletService) {
-  }
+  constructor(
+    public walletService: WalletService,
+    public util: UtilService
+  ) { }
 
-  refreshTxs(): void {
-    this.walletService.refreshTxLog(false, 0);
+  getTxs(): void {
+    console.log('Tx-Listing subscription');
+    this.walletService.getTxLogs()
+      .subscribe((txs) => {
+        this.txs = txs;
+    });
   }
 
   ngOnInit() {
-    this.refreshTxs();
-  }
-
-  txDetail(id:number) {
-
+    this.getTxs();
   }
 
 }

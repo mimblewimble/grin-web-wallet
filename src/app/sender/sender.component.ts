@@ -1,17 +1,17 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {WalletService} from '../wallet.service';
-import { SendTXArgs} from './sender';
+import {SendTXArgs} from '../model/sender';
 
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
-import {hrToAmount, amountAsHr} from '../shared/format';
+import {UtilService} from '../util.service';
 
 @Component({
   selector: 'app-sender',
   template: ``,
 })
-export class SenderComponent implements  OnInit {
+export class SenderComponent implements OnInit {
   constructor(private modalService: NgbModal, private walletService: WalletService) {
   }
 
@@ -44,20 +44,22 @@ export class SenderContentComponent implements OnInit {
   txSendArgs = new SendTXArgs;
   show_error = false;
 
-  constructor(public activeModal: NgbActiveModal, private walletService: WalletService) {
+  constructor(public activeModal: NgbActiveModal,
+              private walletService: WalletService,
+              private util: UtilService) {
   }
 
   ngOnInit() {
-   this.walletService.walletErrorEmitter.subscribe(
-     (error) => {
-       console.log(error.message);
-       this.show_error = true;
-     });
-    }
+    this.walletService.walletErrorEmitter.subscribe(
+      (error) => {
+        console.log(error.message);
+        this.show_error = true;
+      });
+  }
 
   postSend(): void {
     let sending = Object.assign({}, this.txSendArgs);
-    sending.amount = hrToAmount(sending.amount);
+    sending.amount = this.util.hrToAmount(sending.amount);
     this.walletService.postSend(sending);
 
   }
@@ -79,21 +81,21 @@ export class SenderAlertComponent implements OnInit {
 
   ngOnInit(): void {
 
-   this.walletService.walletErrorEmitter.subscribe(
-     (error) => {
-       this.walletService.refreshWalletInfo(false);
-       console.log(error.message);
-       if (error.type === 'success') {
-         this.show_error = false;
-         this.show_success = true;
+    this.walletService.walletErrorEmitter.subscribe(
+      (error) => {
+        this.walletService.refreshWalletInfo(false);
+        console.log(error.message);
+        if (error.type === 'success') {
+          this.show_error = false;
+          this.show_success = true;
 
-       } else {
-         this.show_success = false;
-         this.show_error = true;
-       }
-       this.errorMessage = error.message;
-     });
- }
+        } else {
+          this.show_success = false;
+          this.show_error = true;
+        }
+        this.errorMessage = error.message;
+      });
+  }
 
   public changeSuccessMessage() {
     this._success.next(`${new Date()} - Message successfully changed.`);

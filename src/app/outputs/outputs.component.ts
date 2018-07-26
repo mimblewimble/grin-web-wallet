@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { WalletService} from '../wallet.service';
-import { amountAsHr} from '../shared/format';
+import {Component, OnInit} from '@angular/core';
+import {WalletService} from '../wallet.service';
+import {UtilService} from '../util.service';
 
 @Component({
   selector: 'app-outputs',
@@ -8,11 +8,12 @@ import { amountAsHr} from '../shared/format';
   styleUrls: ['./outputs.component.css']
 })
 export class OutputsComponent implements OnInit {
-  amountAsHr = amountAsHr;
-  constructor(public walletService: WalletService) { }
+  constructor(public walletService: WalletService,
+              public util: UtilService) {
+  }
 
   ngOnInit() {
-    this.walletService.refreshOutputs(false );
+    this.walletService.refreshOutputs(false);
   }
 
 }

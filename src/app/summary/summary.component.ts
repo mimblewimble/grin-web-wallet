@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService } from '../wallet.service';
-import { WalletInfo } from '../wallet-info/walletinfo';
-import { amountAsHr} from '../shared/format';
+import {UtilService} from '../util.service';
 
 @Component({
   selector: 'app-summary',
@@ -9,10 +8,10 @@ import { amountAsHr} from '../shared/format';
   styleUrls: ['./summary.component.css']
 })
 export class SummaryComponent implements OnInit {
-  amountAsHr = amountAsHr;
 
-  constructor(public walletService: WalletService) {
-  }
+  constructor(
+    public walletService: WalletService,
+    public util: UtilService) { }
 
   refreshWalletInfo(): void {
     this.walletService.refreshWalletInfo(true);

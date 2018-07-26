@@ -1,11 +1,12 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {EventEmitter, Injectable} from '@angular/core';
-import {Output, OutputsResponse} from './outputs/output';
-import {TxLogEntry} from './tx-listing/tx-log-entry';
-import {WalletInfo} from './wallet-info/walletinfo';
-import {Error} from './shared/error';
-import {SendTXArgs} from './sender/sender';
+import {Output, OutputsResponse} from './model/output';
+import {TxLogEntry} from './model/tx-log-entry';
+import {WalletInfo} from './model/walletinfo';
+import {Error} from './model/error';
+import {SendTXArgs} from './model/sender';
 import {Observable, of} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class WalletService {
@@ -44,7 +45,7 @@ export class WalletService {
   }
 
   showSender(): void {
-   this.showSenderEmitter.emit(true);
+    this.showSenderEmitter.emit(true);
   }
 
   /** GET outputs from the server */
@@ -54,14 +55,28 @@ export class WalletService {
     }
     let output_url = this.output_url;
     if (refresh_from_node) {
-      output_url += '?refresh' ;
+      output_url += '?refresh';
     }
     this.http.get<OutputsResponse>(output_url)
-    .subscribe( outputs_response => {
-      console.dir('was refreshed: ' + outputs_response[0]);
-      this.outputs = outputs_response[1];
-      this.isUpdatingEmitter.emit(false);
-    });
+      .subscribe(outputs_response => {
+        console.dir('was refreshed: ' + outputs_response[0]);
+        this.outputs = outputs_response[1];
+        this.isUpdatingEmitter.emit(false);
+      });
+  }
+
+  getTxLog(id: number): Observable<TxLogEntry> {
+    return this.http.get<TxLogEntry>(this.txs_url + '?id=' + id)
+      .pipe(map(tx_response => {
+        return tx_response[1][0];
+      }));
+  }
+
+  getTxLogs(): Observable<TxLogEntry[]> {
+    return this.http.get<TxLogEntry>(this.txs_url)
+      .pipe(map(tx_response => {
+        return tx_response[1];
+      }));
   }
 
   /** GET tx log entries from the server */
@@ -71,34 +86,30 @@ export class WalletService {
     }
     let tx_url = this.txs_url;
     if (refresh_from_node) {
-      tx_url += '?refresh' ;
+      tx_url += '?refresh';
     }
     this.http.get<TxLogEntry>(tx_url)
-    .subscribe( tx_response => {
-      this.txs = tx_response[1];
-      console.dir(this.txs);
-      this.isUpdatingEmitter.emit(false);
-      if (cur_tx_id !== 0) {
-        this.cur_tx = this.txs.find(tx => tx.id === cur_tx_id);
-      }
-    });
+      .subscribe(tx_response => {
+        this.txs = tx_response[1];
+        console.dir(this.txs);
+        this.isUpdatingEmitter.emit(false);
+        if (cur_tx_id !== 0) {
+          this.cur_tx = this.txs.find(tx => tx.id === cur_tx_id);
+        }
+      });
   }
 
- refreshHeight(): void {
+  refreshHeight(): void {
     this.http.get(this.node_height_url)
       .subscribe(heightInfo => {
-        this.totalFailureEmitter.emit(false);
-        if (heightInfo[1]) {
-          this.currentNodeHeight = heightInfo[0];
-        }
-      },
+          this.totalFailureEmitter.emit(false);
+          if (heightInfo[1]) {
+            this.currentNodeHeight = heightInfo[0];
+          }
+        },
         error => {
-           this.totalFailureEmitter.emit(true);
+          this.totalFailureEmitter.emit(true);
         });
-  }
-
-  getTx(id: number): Observable<TxLogEntry> {
-    return of(this.txs.find(tx => tx.id === id));
   }
 
   /** GET wallet summary from the server */
@@ -108,7 +119,7 @@ export class WalletService {
     }
     let wallet_info_url = this.wallet_info_url;
     if (refresh_from_node) {
-      wallet_info_url += '?refresh' ;
+      wallet_info_url += '?refresh';
     }
     this.http.get<WalletInfo>(wallet_info_url)
       .subscribe(walletInfo => {
@@ -126,7 +137,7 @@ export class WalletService {
     this.http.post(this.send_url, args)
       .subscribe((res) => {
         this.walletErrorEmitter.emit({
-         type: 'success' ,
+          type: 'success',
           message: 'Ok'
         });
       }, error => {
@@ -144,7 +155,7 @@ export class WalletService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

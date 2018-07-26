@@ -11,6 +11,7 @@ import {SummaryComponent} from './summary/summary.component';
 import {MenuComponent} from './menu/menu.component';
 import {WalletInfoComponent} from './wallet-info/wallet-info.component';
 import {WalletService} from './wallet.service';
+import {UtilService} from './util.service';
 import {FailureContentComponent, RefresherComponent, RefresherContentComponent} from './refresher/refresher.component';
 import {SenderAlertComponent, SenderComponent, SenderContentComponent} from './sender/sender.component';
 
@@ -76,7 +77,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     NgbModule.forRoot(),
   ],
-  providers: [WalletService],
+  providers: [WalletService, UtilService],
   bootstrap: [AppComponent]
 })
 

@@ -1,8 +1,8 @@
 import { ActivatedRoute, Resolve} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {WalletService} from '../wallet.service';
-import {TxLogEntry} from '../tx-listing/tx-log-entry';
-import {amountAsHr, netChange, parseConfirmed, parseDate, parseTxType} from '../shared/format';
+import {TxLogEntry} from '../model/tx-log-entry';
+import {UtilService} from '../util.service';
 
 @Component({
   selector: 'app-tx-detail',
@@ -10,23 +10,26 @@ import {amountAsHr, netChange, parseConfirmed, parseDate, parseTxType} from '../
   styleUrls: ['./tx-detail.component.css']
 })
 export class TxDetailComponent implements OnInit {
-  amountAsHr = amountAsHr;
-  netChange = netChange;
-  parseDate = parseDate;
-  parseConfirmed = parseConfirmed;
-  parseTxType = parseTxType;
+
+  tx: TxLogEntry;
 
   constructor(
     public walletService: WalletService,
+    public util: UtilService,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.getTx();
+    console.log('Get TX Subscription');
+    const id = this.route.snapshot.paramMap.get('id');
+    this.getTx(+id);
   }
 
-  getTx(): void {
-    this.walletService.refreshTxLog(false, +this.route.snapshot.paramMap.get('id'));
+  getTx(id: number): void {
+    this.walletService.getTxLog(id)
+      .subscribe((tx) => {
+        this.tx = tx;
+      });
   }
 
 }

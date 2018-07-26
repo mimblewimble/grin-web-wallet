@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WalletService} from '../wallet.service';
-import { WalletInfo } from './walletinfo';
-import { amountAsHr} from '../shared/format';
+import {UtilService} from '../util.service';
 
 @Component({
   selector: 'app-wallet-info',
@@ -9,9 +8,9 @@ import { amountAsHr} from '../shared/format';
   styleUrls: ['./wallet-info.component.css']
 })
 export class WalletInfoComponent implements OnInit {
-  amountAsHr = amountAsHr;
 
-  constructor(public walletService: WalletService) {
+  constructor(public walletService: WalletService,
+              public util: UtilService) {
   }
 
   refreshWalletInfo(): void {
