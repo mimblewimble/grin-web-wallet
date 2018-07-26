@@ -13,6 +13,7 @@ export class OutputListingComponent implements OnInit, OnDestroy {
   outputs: Output[];
   navigationSubscription;
   @Input() num_entries: number;
+  @Input() condensed: boolean;
 
   constructor(
     public walletService: WalletService,

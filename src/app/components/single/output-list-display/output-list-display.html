@@ -1,9 +1,6 @@
 <div class="container-fluid">
   <h3>Wallet Outputs</h3>
   <p>Validated as of Block: {{info?.last_confirmed_height}} ({{walletService.currentNodeHeight-info?.last_confirmed_height}} Blocks Ago)</p>
-  <a routerLink="/wallet-info">
-    Show Summary
-  </a>
-  <app-output-listing [num_entries]="0"></app-output-listing>
+  <app-output-listing [num_entries]="0" [condensed]="false"></app-output-listing>
 
 </div>
