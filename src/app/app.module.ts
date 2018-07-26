@@ -6,7 +6,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {AppComponent} from './components/single/app/app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {OutputsComponent} from './components/single/outputs/outputs.component';
+import {OutputListDisplay} from './components/single/output-list-display/output-list-display';
 import {SummaryComponent} from './components/single/summary/summary.component';
 import {MenuComponent} from './components/single/menu/menu.component';
 import {WalletHomeComponent} from './components/single/wallet-home/wallet-home.component';
@@ -29,6 +29,7 @@ import { TxListDisplayComponent } from './components/single/tx-list-display/tx-l
 import { TxDetailDisplayComponent } from './components/single/tx-detail-display/tx-detail-display.component';
 import { TxDetailComponent} from './components/reusable/tx-detail/tx-detail.component';
 import { WalletInfoDetailComponent } from './components/reusable/wallet-info-detail/wallet-info-detail.component';
+import { OutputListingComponent } from './components/reusable/output-listing/output-listing.component';
 
 library.add(faArrowAltCircleDown);
 library.add(faArrowAltCircleUp);
@@ -39,7 +40,7 @@ library.add(faQuestionCircle);
 @NgModule({
   declarations: [
     AppComponent,
-    OutputsComponent,
+    OutputListDisplay,
     SummaryComponent,
     MenuComponent,
     WalletHomeComponent,
@@ -54,6 +55,7 @@ library.add(faQuestionCircle);
     TxDetailComponent,
     TxDetailDisplayComponent,
     WalletInfoDetailComponent,
+    OutputListingComponent,
   ],
   entryComponents: [RefresherContentComponent,
   FailureContentComponent,

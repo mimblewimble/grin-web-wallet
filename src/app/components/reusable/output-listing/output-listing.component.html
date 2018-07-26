@@ -1,0 +1,29 @@
+<table class="table table-sm table-hover table-striped">
+  <thead>
+  <th>Amount</th>
+  <th>Status</th>
+  <th>Block Height</th>
+  <th>Root Key ID</th>
+  <th>Key Id</th>
+  <th>Child Key Index</th>
+  <th>Lock Height</th>
+  <th>Coinbase?</th>
+  <th>Block</th>
+  <th>Transaction Id</th>
+
+  </thead>
+  <tbody>
+  <tr *ngFor="let output of outputs">
+    <td> {{util.amountAsHr(output.value, 9)}}</td>
+    <td class="">{{output.status}}</td>
+    <td class="">{{output.height}}</td>
+    <td class="">{{output.root_key_id}}</td>
+    <td class="">{{output.key_id}}</td>
+    <td class="">{{output.n_child}}</td>
+    <td class="">{{output.lock_height}}</td>
+    <td class="">{{output.is_coinbase}}</td>
+    <td class="">{{output.block}}</td>
+    <td class="">{{output.tx_log_entry}}</td>
+  </tr>
+  </tbody>
+</table>

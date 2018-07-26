@@ -13,10 +13,6 @@ export class WalletHomeComponent implements OnInit {
               public util: UtilService) {
   }
 
-  refreshWalletInfo(): void {
-    this.walletService.refreshWalletInfo(true);
-  }
-
   ngOnInit() {
   }
 

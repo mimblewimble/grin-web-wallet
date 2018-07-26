@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.walletService.refreshHeight();
-    this.walletService.refreshWalletInfo(false);
     const counter = interval(5000);
     counter.subscribe(n =>
       this.walletService.refreshHeight()

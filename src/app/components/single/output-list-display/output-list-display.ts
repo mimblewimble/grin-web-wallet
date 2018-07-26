@@ -3,11 +3,11 @@ import {WalletService} from '../../../services/wallet.service';
 import {UtilService} from '../../../services/util.service';
 
 @Component({
-  selector: 'app-outputs',
-  templateUrl: './outputs.component.html',
-  styleUrls: ['./outputs.component.css']
+  selector: 'app-output-list-display',
+  templateUrl: './output-list-display.html',
+  styleUrls: ['./output-list-display.css']
 })
-export class OutputsComponent implements OnInit {
+export class OutputListDisplay implements OnInit {
   constructor(public walletService: WalletService,
               public util: UtilService) {
   }
