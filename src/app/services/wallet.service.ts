@@ -7,7 +7,7 @@ import {Error} from '../model/error';
 import {SendTXArgs} from '../model/sender';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Resolve, Router} from '@angular/router';
 
 @Injectable()
 export class WalletService {
@@ -82,8 +82,20 @@ export class WalletService {
    * Rest-y type functions
    */
 
-  getOutputs(): Observable<Output[]> {
-    return this.http.get<Output>(this.output_url)
+  getOutputs(tx_id: number, show_spent: boolean): Observable<Output[]> {
+    let url = this.output_url;
+    if (tx_id != null) {
+     url += '?tx_id=' + tx_id;
+    }
+    if (show_spent === true) {
+      if (tx_id != null) {
+        url += '&show_spent=true';
+      } else {
+        url += '?show_spent=true';
+      }
+    }
+    console.log('Calling URL ' + url);
+    return this.http.get<Output>(url)
       .pipe(map(outputs_response => {
         return outputs_response[1];
       }));
@@ -155,5 +167,4 @@ export class WalletService {
     console.log('WalletService: ' + message);
   }
 }
-
 

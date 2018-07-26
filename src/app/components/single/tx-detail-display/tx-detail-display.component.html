@@ -1,8 +1,17 @@
-<div class="container-fluid">
-  <div class="w-50">
-      <h3>Transaction Information</h3>
-    <p>
-    </p>
-    <app-tx-detail></app-tx-detail>
+<div class="d-flex flex-column m-3">
+  <div class="d-flex flex-row">
+    <div class="w-50">
+      <div class="d-flex flex-row justify-content-between">
+        <h3>Transaction Detail</h3>
+      </div>
+
+      <app-tx-detail></app-tx-detail>
+    </div>
+    <div class="w-50 ml-4">
+      <div class="d-flex flex-row justify-content-between">
+        <h3>Associated Outputs</h3>
+      </div>
+      <app-output-listing [condensed]="true"></app-output-listing>
+    </div>
   </div>
 </div>
