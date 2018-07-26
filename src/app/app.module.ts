@@ -3,17 +3,17 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {RouterModule, Routes} from '@angular/router';
 
-import {AppComponent} from './app.component';
-import {OutputsComponent} from './outputs/outputs.component';
-import {SummaryComponent} from './summary/summary.component';
-import {MenuComponent} from './menu/menu.component';
-import {WalletInfoComponent} from './wallet-info/wallet-info.component';
-import {WalletService} from './wallet.service';
-import {UtilService} from './util.service';
-import {FailureContentComponent, RefresherComponent, RefresherContentComponent} from './refresher/refresher.component';
-import {SenderAlertComponent, SenderComponent, SenderContentComponent} from './sender/sender.component';
+import {AppComponent} from './components/app/app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {OutputsComponent} from './components/single/outputs/outputs.component';
+import {SummaryComponent} from './components/single/summary/summary.component';
+import {MenuComponent} from './components/single/menu/menu.component';
+import {WalletInfoComponent} from './components/single/wallet-info/wallet-info.component';
+import {WalletService} from './services/wallet.service';
+import {UtilService} from './services/util.service';
+import {FailureContentComponent, RefresherComponent, RefresherContentComponent} from './components/single/refresher/refresher.component';
+import {SenderAlertComponent, SenderComponent, SenderContentComponent} from './components/single/sender/sender.component';
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
@@ -24,27 +24,16 @@ import {
   faSyncAlt,
   faWallet,
 } from '@fortawesome/free-solid-svg-icons';
-import { TxListingComponent } from './tx-listing/tx-listing.component';
-import { TxListAllComponent } from './tx-list-all/tx-list-all.component';
-import { TxDetailComponent } from './tx-detail/tx-detail.component';
+import { TxListingComponent } from './components/reusable/tx-listing/tx-listing.component';
+import { TxListAllComponent } from './components/single/tx-list-all/tx-list-all.component';
+import { TxDetailComponent } from './components/single/tx-detail/tx-detail.component';
+import { WalletInfoDetailComponent } from './components/reusable/wallet-info-detail/wallet-info-detail.component';
 
 library.add(faArrowAltCircleDown);
 library.add(faArrowAltCircleUp);
 library.add(faSyncAlt);
 library.add(faWallet);
 library.add(faQuestionCircle);
-
-const appRoutes: Routes = [
-  {path: 'wallet-info', component: WalletInfoComponent},
-  {path: 'wallet-outputs', component: OutputsComponent},
-  {path: 'tx-detail/:id', component: TxDetailComponent},
-  {path: 'txs-all', component: TxListAllComponent},
-  {
-    path: '',
-    redirectTo: '/wallet-info',
-    pathMatch: 'full'
-  },
-];
 
 @NgModule({
   declarations: [
@@ -62,19 +51,17 @@ const appRoutes: Routes = [
     TxListingComponent,
     TxListAllComponent,
     TxDetailComponent,
+    WalletInfoDetailComponent,
   ],
   entryComponents: [RefresherContentComponent,
   FailureContentComponent,
   SenderContentComponent],
   imports: [
-    RouterModule.forRoot(
-      appRoutes,
-      {enableTracing: false}
-    ),
     BrowserModule,
     FontAwesomeModule,
     FormsModule,
     HttpClientModule,
+    AppRoutingModule,
     NgbModule.forRoot(),
   ],
   providers: [WalletService, UtilService],

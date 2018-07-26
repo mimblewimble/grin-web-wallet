@@ -1,10 +1,10 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {EventEmitter, Injectable} from '@angular/core';
-import {Output, OutputsResponse} from './model/output';
-import {TxLogEntry} from './model/tx-log-entry';
-import {WalletInfo} from './model/walletinfo';
-import {Error} from './model/error';
-import {SendTXArgs} from './model/sender';
+import {Output, OutputsResponse} from '../model/output';
+import {TxLogEntry} from '../model/tx-log-entry';
+import {WalletInfo} from '../model/walletinfo';
+import {Error} from '../model/error';
+import {SendTXArgs} from '../model/sender';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 

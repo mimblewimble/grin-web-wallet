@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WalletService} from '../wallet.service';
+import {WalletService} from '../../../services/wallet.service';
 
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 

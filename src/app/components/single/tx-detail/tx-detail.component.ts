@@ -1,8 +1,8 @@
 import { ActivatedRoute, Resolve} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import {WalletService} from '../wallet.service';
-import {TxLogEntry} from '../model/tx-log-entry';
-import {UtilService} from '../util.service';
+import {WalletService} from '../../../services/wallet.service';
+import {TxLogEntry} from '../../../model/tx-log-entry';
+import {UtilService} from '../../../services/util.service';
 
 @Component({
   selector: 'app-tx-detail',

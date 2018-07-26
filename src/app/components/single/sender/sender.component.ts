@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WalletService} from '../wallet.service';
-import {SendTXArgs} from '../model/sender';
+import {WalletService} from '../../../services/wallet.service';
+import {SendTXArgs} from '../../../model/sender';
 
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
-import {UtilService} from '../util.service';
+import {UtilService} from '../../../services/util.service';
 
 @Component({
   selector: 'app-sender',

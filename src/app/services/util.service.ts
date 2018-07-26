@@ -1,4 +1,4 @@
-import {TxLogEntry} from './model/tx-log-entry';
+import {TxLogEntry} from '../model/tx-log-entry';
 import {Injectable} from '@angular/core';
 
 const GRIN_BASE = 1000000000;
