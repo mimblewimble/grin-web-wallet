@@ -1,7 +1,7 @@
 import {ActivatedRoute, NavigationEnd, ParamMap, Router} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
 import {interval, Observable} from 'rxjs';
-import {WalletService} from '../../services/wallet.service';
+import {WalletService} from '../../../services/wallet.service';
 import {switchMap} from 'rxjs/operators';
 
 @Component({

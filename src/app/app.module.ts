@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import {AppComponent} from './components/app/app.component';
+import {AppComponent} from './components/single/app/app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {OutputsComponent} from './components/single/outputs/outputs.component';
 import {SummaryComponent} from './components/single/summary/summary.component';
