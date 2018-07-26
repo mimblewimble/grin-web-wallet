@@ -9,7 +9,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {OutputsComponent} from './components/single/outputs/outputs.component';
 import {SummaryComponent} from './components/single/summary/summary.component';
 import {MenuComponent} from './components/single/menu/menu.component';
-import {WalletInfoComponent} from './components/single/wallet-info/wallet-info.component';
+import {WalletHomeComponent} from './components/single/wallet-home/wallet-home.component';
 import {WalletService} from './services/wallet.service';
 import {UtilService} from './services/util.service';
 import {FailureContentComponent, RefresherComponent, RefresherContentComponent} from './components/single/refresher/refresher.component';
@@ -41,7 +41,7 @@ library.add(faQuestionCircle);
     OutputsComponent,
     SummaryComponent,
     MenuComponent,
-    WalletInfoComponent,
+    WalletHomeComponent,
     RefresherComponent,
     RefresherContentComponent,
     FailureContentComponent,

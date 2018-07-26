@@ -1,0 +1,34 @@
+<table class="table table-sm">
+  <thead>
+  </thead>
+  <tbody>
+  <tr>
+    <td colspan="2">Last Validated at Block {{info?.last_confirmed_height}}
+    ({{walletService.currentNodeHeight-info?.last_confirmed_height}} Blocks Ago)
+    </td>
+  </tr>
+  <tr class="table-primary">
+    <td>Total</td>
+    <td class="text-right">{{util.amountAsHr(info?.total, 9)}}</td>
+  </tr>
+  <tr>
+    <td>Awaiting Confirmation</td>
+    <td class="text-right">{{util.amountAsHr(info?.amount_awaiting_confirmation, 9)}}</td>
+  </tr>
+  <tr>
+    <td>Immature Coinbase
+    <td class="text-right">{{util.amountAsHr(info?.amount_immature,9)}}</td>
+  </tr>
+
+  <tr class="table-success">
+    <td>Currently Spendable</td>
+    <td class="text-right">{{util.amountAsHr(info?.amount_currently_spendable, 9)}}</td>
+  </tr>
+
+  <tr>
+    <td colspan="2" class="small">({{util.amountAsHr(info?.amount_locked,9)}} is locked pending transaction
+      confirmations)
+  </tr>
+  </tbody>
+</table>
+

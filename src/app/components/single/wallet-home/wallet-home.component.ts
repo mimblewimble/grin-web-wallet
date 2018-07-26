@@ -4,10 +4,10 @@ import {UtilService} from '../../../services/util.service';
 
 @Component({
   selector: 'app-wallet-info',
-  templateUrl: './wallet-info.component.html',
-  styleUrls: ['./wallet-info.component.css']
+  templateUrl: './wallet-home.component.html',
+  styleUrls: ['./wallet-home.component.css']
 })
-export class WalletInfoComponent implements OnInit {
+export class WalletHomeComponent implements OnInit {
 
   constructor(public walletService: WalletService,
               public util: UtilService) {

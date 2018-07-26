@@ -65,6 +65,13 @@ export class WalletService {
       });
   }
 
+  getOutputs(): Observable<Output[]> {
+    return this.http.get<Output>(this.output_url)
+      .pipe(map(outputs_response => {
+        return outputs_response[1];
+      }));
+  }
+
   getTxLog(id: number): Observable<TxLogEntry> {
     return this.http.get<TxLogEntry>(this.txs_url + '?id=' + id)
       .pipe(map(tx_response => {
@@ -79,24 +86,11 @@ export class WalletService {
       }));
   }
 
-  /** GET tx log entries from the server */
-  refreshTxLog(refresh_from_node: boolean, cur_tx_id: number): void {
-    if (refresh_from_node) {
-      this.isUpdatingEmitter.emit(true);
-    }
-    let tx_url = this.txs_url;
-    if (refresh_from_node) {
-      tx_url += '?refresh';
-    }
-    this.http.get<TxLogEntry>(tx_url)
-      .subscribe(tx_response => {
-        this.txs = tx_response[1];
-        console.dir(this.txs);
-        this.isUpdatingEmitter.emit(false);
-        if (cur_tx_id !== 0) {
-          this.cur_tx = this.txs.find(tx => tx.id === cur_tx_id);
-        }
-      });
+  getWalletInfo(): Observable<WalletInfo> {
+    return this.http.get<WalletInfo>(this.wallet_info_url)
+      .pipe(map(wallet_response => {
+        return wallet_response[1];
+      }));
   }
 
   refreshHeight(): void {

@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="w-50">
+    <div class="d-flex flex-row justify-content-between">
+      <h3>Wallet Summary</h3>
+      <a routerLink="/wallet-outputs">
+        Show Outputs
+      </a>
+    </div>
+
+    <app-wallet-info-detail></app-wallet-info-detail>
+
+    <p></p>
+    <div class="d-flex flex-row justify-content-between">
+      <h3>Most Recent Transactions</h3>
+      <a routerLink="/txs-all">
+        Show All Transactions
+      </a>
+    </div>
+    <app-tx-listing [num_entries]="10"></app-tx-listing>
+    <button type="button" class="btn btn-primary float-right" (click)="refreshWalletInfo()">Update and Validate</button>
+
+  </div>
+</div>
+
