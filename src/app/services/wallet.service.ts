@@ -7,6 +7,7 @@ import {Error} from '../model/error';
 import {SendTXArgs} from '../model/sender';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Injectable()
 export class WalletService {
@@ -17,29 +18,18 @@ export class WalletService {
   private node_height_url = 'http://localhost:13420/v1/wallet/owner/node_height';
   private send_url = 'http://localhost:13420/v1/wallet/owner/issue_send_tx';
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    })
-  };
-
   isUpdatingEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   totalFailureEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   showSenderEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   walletErrorEmitter: EventEmitter<Error> = new EventEmitter<Error>();
 
-
-  outputs: Output[];
-  txs: TxLogEntry[];
-  cur_tx: TxLogEntry;
-  walletInfo: WalletInfo;
   currentNodeHeight: number;
 
   constructor(
     private http: HttpClient,
-    // private messageService: MessageService
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.currentNodeHeight = 0;
   }
@@ -48,22 +38,49 @@ export class WalletService {
     this.showSenderEmitter.emit(true);
   }
 
-  /** GET outputs from the server */
-  refreshOutputs(refresh_from_node: boolean): void {
-    if (refresh_from_node) {
-      this.isUpdatingEmitter.emit(true);
-    }
-    let output_url = this.output_url;
-    if (refresh_from_node) {
-      output_url += '?refresh';
-    }
-    this.http.get<OutputsResponse>(output_url)
-      .subscribe(outputs_response => {
-        console.dir('was refreshed: ' + outputs_response[0]);
-        this.outputs = outputs_response[1];
+  /**
+   * Refresh the height from the wallet's preferred node
+   * Should be run fairly frequently to let user know when
+   * to update
+   */
+
+  refreshHeight(): void {
+    this.http.get(this.node_height_url)
+      .subscribe(heightInfo => {
+          this.totalFailureEmitter.emit(false);
+          if (heightInfo[1]) {
+            this.currentNodeHeight = heightInfo[0];
+          }
+        },
+        error => {
+          this.totalFailureEmitter.emit(true);
+        });
+  }
+
+  /**
+   * Refresh all wallet info against the preferred node
+   * Can potentially take a while, so user should be blocked
+   * while this is happening
+   */
+
+  refreshWalletFromNode(): void {
+    this.isUpdatingEmitter.emit(true);
+    // just do a wallet info with with a refresh, ignore the result
+    const wallet_info_url = this.wallet_info_url + '?refresh';
+    this.http.get<WalletInfo>(wallet_info_url)
+      .subscribe(walletInfo => {
+        const info = walletInfo[1];
+        if (info.last_confirmed_height > this.currentNodeHeight) {
+          this.currentNodeHeight = info.last_confirmed_height;
+        }
+        this.router.navigate(this.route.snapshot.url);
         this.isUpdatingEmitter.emit(false);
       });
   }
+
+  /**
+   * Rest-y type functions
+   */
 
   getOutputs(): Observable<Output[]> {
     return this.http.get<Output>(this.output_url)
@@ -93,37 +110,7 @@ export class WalletService {
       }));
   }
 
-  refreshHeight(): void {
-    this.http.get(this.node_height_url)
-      .subscribe(heightInfo => {
-          this.totalFailureEmitter.emit(false);
-          if (heightInfo[1]) {
-            this.currentNodeHeight = heightInfo[0];
-          }
-        },
-        error => {
-          this.totalFailureEmitter.emit(true);
-        });
-  }
 
-  /** GET wallet summary from the server */
-  refreshWalletInfo(refresh_from_node: boolean): void {
-    if (refresh_from_node) {
-      this.isUpdatingEmitter.emit(true);
-    }
-    let wallet_info_url = this.wallet_info_url;
-    if (refresh_from_node) {
-      wallet_info_url += '?refresh';
-    }
-    this.http.get<WalletInfo>(wallet_info_url)
-      .subscribe(walletInfo => {
-        this.walletInfo = walletInfo[1];
-        if (this.walletInfo.last_confirmed_height > this.currentNodeHeight) {
-          this.currentNodeHeight = this.walletInfo.last_confirmed_height;
-        }
-        this.isUpdatingEmitter.emit(false);
-      });
-  }
 
   postSend(args: SendTXArgs): void {
     console.log('Posting - ' + this.send_url);
@@ -163,7 +150,7 @@ export class WalletService {
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+  /** Log a message with the MessageService */
   private log(message: string) {
     console.log('WalletService: ' + message);
   }

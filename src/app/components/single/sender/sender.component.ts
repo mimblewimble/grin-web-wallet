@@ -83,7 +83,6 @@ export class SenderAlertComponent implements OnInit {
 
     this.walletService.walletErrorEmitter.subscribe(
       (error) => {
-        this.walletService.refreshWalletInfo(false);
         console.log(error.message);
         if (error.type === 'success') {
           this.show_error = false;

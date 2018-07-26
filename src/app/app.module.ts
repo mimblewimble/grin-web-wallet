@@ -6,7 +6,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {AppComponent} from './components/single/app/app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {OutputListDisplay} from './components/single/output-list-display/output-list-display';
+import {OutputListDisplayComponent} from './components/single/output-list-display/output-list-display';
 import {SummaryComponent} from './components/single/summary/summary.component';
 import {MenuComponent} from './components/single/menu/menu.component';
 import {WalletHomeComponent} from './components/single/wallet-home/wallet-home.component';
@@ -40,7 +40,7 @@ library.add(faQuestionCircle);
 @NgModule({
   declarations: [
     AppComponent,
-    OutputListDisplay,
+    OutputListDisplayComponent,
     SummaryComponent,
     MenuComponent,
     WalletHomeComponent,

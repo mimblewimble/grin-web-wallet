@@ -13,6 +13,10 @@ export class WalletHomeComponent implements OnInit {
               public util: UtilService) {
   }
 
+  refreshFromNode(): void{
+    this.walletService.refreshWalletFromNode();
+  }
+
   ngOnInit() {
   }
 

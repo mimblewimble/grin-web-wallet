@@ -40,7 +40,7 @@ export class RefresherComponent {
           });
         } else {
           if (!value && failureModalRef) {
-            this.walletService.refreshWalletInfo(false);
+            this.walletService.refreshWalletFromNode();
             failureModalRef.close();
             failureModalRef = null;
           }
