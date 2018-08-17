@@ -1,17 +1,23 @@
 sudo: required
 addons:
   chrome: stable
-
 language: node_js
 node_js:
-  - "8"
-
+- '8'
 branches:
   only:
-    - master
-
+  - master
 before_script:
-  - npm install -g @angular/cli
-
+- npm install -g @angular/cli
 script:
-  - ng build --prod
+- ng build --prod
+deploy:
+  provider: releases
+  api_key:
+    secure: CHtQPmxWPWEtcQ4tBkkbjQ/Un9Ub2NnpZ3T3BWkoP5rakMXOSGvEy1ZMnWuBPIDk6yJ1sdqxAbOlDvrxwIjTZuz9gpzgNpMnxRJGvHEqyfWg4II10FiW5rhA3WAiL7oyzKdDQ4ZP4OJlaD3rXJ0ydUzAvhTTQegDOuKxESWQ1wXP8veEHtsKZ72oC1lPsTTtyAKidqodu9d37q9atzgByPqqDfvdyvzkAIKiCpHI6hOtJ+lMGNawZvbERWvhY8EQBsNaltIEN26ow79pOf3ylsT9yMkWqI5YZ8pqaBu4AOmra4QufNP+1BCNaMTmKRtnlHR9fPszg+11NF2h+Se/EdI2afQliZPfjwS6mO6qNRCvipfwEmQsbvhuAzSV4QVzTQGXzOI0oii3avfkPh9t/13WMRJaZjBpBqYtujK7NaXbLs3yrGTGxoCM9FRRNbrFrvPszhm4BYcsBIGdpqdWwdLa2U9lE/RB3zuLBt0Lsm3L+4UR2MQMCYm0ppy4LfYpKbDGLgR+WIvDWCpwZD6vfkfai4t0sUFVLkkT14mZundeN7Mh/v0AgDJGL9Zs/8ekt73ErGUeLKyXPyJzpBc01Yw8Sg5KLwbT7VKmOB4FrDOPIy4nx2y8ysHwpNJTQTHYB+G0NqspGS95jjHEJHQj4q/39Q0urFGBFGS8NDuWD4o=
+  file_glob: true
+  file: dist/**/*
+  skip_cleanup: true
+  on:
+    repo: mimblewimble/grin-web-wallet
+    tags: true
